@@ -100,22 +100,25 @@ let passwordOptions;
 // Function to prompt user for password options
 function getPasswordOptions() {
   //condition for prompt to select length of password;  characters >= 8 ; characters <= 128
-  let passwordLength = prompt("Let's create your password!  Please type how many characters you'd like it to have below and click OK. You can select between 8 and 128 characters.");
-  if (passwordLength >= 8 && passwordLength <= 128) {
-    alert(`You selected ${passwordLength} characters. Great! Now let's continue.`);
-  } else {
-    alert(`Uh, oh, that doesn't seem right! Please refresh the page and write a password lenght between 8 and 128.`)
-  };
+  let length = prompt("Let's create your password!  Please type how many characters you'd like it to have below and click OK. You can select between 8 and 128 characters.");
+  if (length < 8 || length > 128) {
+    alert(`Uh, oh, that doesn't seem right! Please refresh the page and write a password lenght between 8 and 128.`);
+    return null;
+  }
+  // alert(`You selected ${passwordLength} characters. Great! Now let's continue.`); //not needed ; 99% of the time going for the wrong option -no need to tell them they've done it right
+  // } else { //return null (within if)
+  //   alert(`Uh, oh, that doesn't seem right! Please refresh the page and write a password lenght between 8 and 128.`) 
+  // };
 
   //prompt to pick character types: Lowercase, Uppercase, Numeric, Special Characters ($@%&*, etc)  use confirm() - returns true if OK false otherwise ;  
   //at least one character type must be selected for form validation
 
   //lowercase option
-  if (confirm("Would you like any lowercase characters in your password? (e.g. a, b, c, d...)") == true) {
+  if (confirm("Would you like any lowercase characters in your password? (e.g. a, b, c, d...)") === true) {
     lowercaseOption = true;
   } else {
     lowercaseOption = false;
-  }
+  } // lowercaseOption = confirm(...) === true; 
 
   //uppercase option
   if (confirm("Would you like any lowercase characters in your password? (e.g. a, b, c, d...)") == true) {
@@ -137,24 +140,75 @@ function getPasswordOptions() {
   } else {
     specialCharactersOption = false;
   }
-
+  //restriction - conditional on whether or not they chose false on everything - using && on everything - can't continue without any choice
   //return statement
-  return passwordOptions = [lowercaseOption, uppercaseOption, numericOption, specialCharactersOption];
+  // return passwordOptions = [lowercaseOption, uppercaseOption, numericOption, specialCharactersOption];
+  passwordOptions = {
+    length: length,
+    lowercaseOption: lowercaseOption,
+    uppercaseOption: uppercaseOption,
+    numericOption: numericOption,
+    specialCharactersOption: specialCharactersOption
+  }
 
+  return passwordOptions;
 }
 
 // Function for getting a random element from an array
 function getRandom(arr) {
   //random picker of at least 1 character from each array
-
-  return
+  let randomIndex = Math.floor(Math.random() * arr.length);
+  let randomElement = arr[randomIndex];
+  return randomElement
 }
 
 // Function to generate password with user input
 function generatePassword() {
   //based on user input and random characters selected, fill in password based on chosen length and return the completed password
-  return
+  let options = getPasswordOptions()
+
+  let guarantee = [];
+  let possibles = [];
+  let finalPassword = [];
+
+  if (options.lowercaseOption) {
+    possibles = possibles.concat(lowerCasedCharacters);
+    guarantee.push(getRandom(lowerCasedCharacters));
+    console.log(guarantee)
+  } //repeat for each one
+
+  if (options.lowercaseOption) {
+    possibles = possibles.concat(lowerCasedCharacters);
+    guarantee.push(getRandom(lowerCasedCharacters));
+    console.log(guarantee)
+  }
+
+  if (options.lowercaseOption) {
+    possibles = possibles.concat(lowerCasedCharacters);
+    guarantee.push(getRandom(lowerCasedCharacters));
+    console.log(guarantee)
+  }
+
+  if (options.lowercaseOption) {
+    possibles = possibles.concat(lowerCasedCharacters);
+    guarantee.push(getRandom(lowerCasedCharacters));
+    console.log(guarantee)
+  }
+
+
+  for (let i = 0; i < options.length; i++) {
+    var possible = getRandom(possibles);
+    finalPassword.push(possible);
+    console.log(possible);
+  }
+
+  for (let i = 0; i < guarantee.length; i++) {
+    finalPassword[i] = guarantee[i];
+  }
+
+  return finalPassword.join(''); // adds up both for loops
 }
+
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
