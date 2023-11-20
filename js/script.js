@@ -114,32 +114,41 @@ function getPasswordOptions() {
   //at least one character type must be selected for form validation
 
   //lowercase option
-  if (confirm("Would you like any lowercase characters in your password? (e.g. a, b, c, d...)") === true) {
-    lowercaseOption = true;
-  } else {
-    lowercaseOption = false;
-  } // lowercaseOption = confirm(...) === true; 
+  // if (confirm("Would you like any lowercase characters in your password? (e.g. a, b, c, d...)") === true) {
+  //   lowercaseOption = true;
+  // } else {
+  //   lowercaseOption = false;
+  // } // lowercaseOption = confirm(...) === true; 
+
+  lowercaseOption = confirm("Would you like any lowercase characters in your password? (e.g. a, b, c, d...)");
 
   //uppercase option
-  if (confirm("Would you like any lowercase characters in your password? (e.g. a, b, c, d...)") == true) {
-    uppercaseOption = true;
-  } else {
-    uppercaseOption = false;
-  }
+  // if (confirm("Would you like any lowercase characters in your password? (e.g. a, b, c, d...)") == true) {
+  //   uppercaseOption = true;
+  // } else {
+  //   uppercaseOption = false;
+  // }
+
+  uppercaseOption = confirm("Would you like any lowercase characters in your password? (e.g. a, b, c, d...)");
 
   //numeric option
-  if (confirm("Would you like any numeric characters in your password? (e.g 1, 2, 3, 4...)") == true) {
-    numericOption = true;
-  } else {
-    numericOption = false;
-  }
+  // if (confirm("Would you like any numeric characters in your password? (e.g 1, 2, 3, 4...)") == true) {
+  //   numericOption = true;
+  // } else {
+  //   numericOption = false;
+  // }
+
+  numericOption = confirm("Would you like any numeric characters in your password? (e.g 1, 2, 3, 4...)");
 
   //special characters option
-  if (confirm("Would you like any special characters in your password? (e.g @,%,+, /,!,#,$...)") == true) {
-    specialCharactersOption = true;
-  } else {
-    specialCharactersOption = false;
-  }
+  // if (confirm("Would you like any special characters in your password? (e.g @,%,+, /,!,#,$...)") == true) {
+  //   specialCharactersOption = true;
+  // } else {
+  //   specialCharactersOption = false;
+  // }
+
+  specialCharactersOption = confirm("Would you like any special characters in your password? (e.g @,%,+, /,!,#,$...)");
+
   //restriction - conditional on whether or not they chose false on everything - using && on everything - can't continue without any choice
   //return statement
   // return passwordOptions = [lowercaseOption, uppercaseOption, numericOption, specialCharactersOption];
@@ -164,9 +173,9 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
-  //based on user input and random characters selected, fill in password based on chosen length and return the completed password
-  let options = getPasswordOptions()
+  //based on user input(guarantee) and random characters selected(possibles), fill in password based on chosen length and return the completed password (finalPassword);
 
+  let options = getPasswordOptions()
   let guarantee = [];
   let possibles = [];
   let finalPassword = [];
