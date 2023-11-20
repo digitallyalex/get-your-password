@@ -156,32 +156,27 @@ function generatePassword() {
   if (options.lowercaseOption) {
     possibles = possibles.concat(lowerCasedCharacters);
     guarantee.push(getRandom(lowerCasedCharacters));
-    console.log(guarantee)
   };
 
   if (options.uppercaseOption) {
     possibles = possibles.concat(upperCasedCharacters);
     guarantee.push(getRandom(upperCasedCharacters));
-    console.log(guarantee)
   };
 
   if (options.numericOption) {
     possibles = possibles.concat(numericCharacters);
     guarantee.push(getRandom(numericCharacters));
-    console.log(guarantee)
   };
 
   if (options.specialCharactersOption) {
     possibles = possibles.concat(specialCharacters);
     guarantee.push(getRandom(specialCharacters));
-    console.log(guarantee)
   };
 
   //looping through possibles and guarantee arrays to create the final password based on user options
   for (let i = 0; i < options.length; i++) {
     var possible = getRandom(possibles);
     finalPassword.push(possible);
-    console.log(possible);
   };
 
   for (let i = 0; i < guarantee.length; i++) {
