@@ -22,7 +22,7 @@ Then, the user will have to click 'OK' for each type of character they need to h
 
 In the case that the password length is invalid, or that the user doesn't select any type of characters, an alert will appear, and the process will start from scratch.
 
-![Screenshot of what the application looks like on mobile](./images/screenshotTwo.png);
+![Screenshot of what the application looks like on mobile](./images/screenshotTwo.png)
 
 The application can also be accessed via mobile.
 
