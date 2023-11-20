@@ -102,74 +102,46 @@ function getPasswordOptions() {
   //condition for prompt to select length of password;  characters >= 8 ; characters <= 128
   let length = prompt("Let's create your password!  Please type how many characters you'd like it to have below and click OK. You can select between 8 and 128 characters.");
   if (length < 8 || length > 128) {
-    alert(`Uh, oh, that doesn't seem right! Please refresh the page and write a password lenght between 8 and 128.`);
+    alert(`Uh, oh, that doesn't seem right! Please start again and write a password lenght between 8 and 128.`);
     return null;
-  }
-  // alert(`You selected ${passwordLength} characters. Great! Now let's continue.`); //not needed ; 99% of the time going for the wrong option -no need to tell them they've done it right
-  // } else { //return null (within if)
-  //   alert(`Uh, oh, that doesn't seem right! Please refresh the page and write a password lenght between 8 and 128.`) 
-  // };
+  };
 
   //prompt to pick character types: Lowercase, Uppercase, Numeric, Special Characters ($@%&*, etc)  use confirm() - returns true if OK false otherwise ;  
   //at least one character type must be selected for form validation
 
   //lowercase option
-  // if (confirm("Would you like any lowercase characters in your password? (e.g. a, b, c, d...)") === true) {
-  //   lowercaseOption = true;
-  // } else {
-  //   lowercaseOption = false;
-  // } // lowercaseOption = confirm(...) === true; 
-
   lowercaseOption = confirm("Would you like any lowercase characters in your password? (e.g. a, b, c, d...)");
 
   //uppercase option
-  // if (confirm("Would you like any lowercase characters in your password? (e.g. a, b, c, d...)") == true) {
-  //   uppercaseOption = true;
-  // } else {
-  //   uppercaseOption = false;
-  // }
-
-  uppercaseOption = confirm("Would you like any lowercase characters in your password? (e.g. a, b, c, d...)");
+  uppercaseOption = confirm("Would you like any uppercase characters in your password? (e.g. A, B, C, D...)");
 
   //numeric option
-  // if (confirm("Would you like any numeric characters in your password? (e.g 1, 2, 3, 4...)") == true) {
-  //   numericOption = true;
-  // } else {
-  //   numericOption = false;
-  // }
-
   numericOption = confirm("Would you like any numeric characters in your password? (e.g 1, 2, 3, 4...)");
 
   //special characters option
-  // if (confirm("Would you like any special characters in your password? (e.g @,%,+, /,!,#,$...)") == true) {
-  //   specialCharactersOption = true;
-  // } else {
-  //   specialCharactersOption = false;
-  // }
-
   specialCharactersOption = confirm("Would you like any special characters in your password? (e.g @,%,+, /,!,#,$...)");
 
   //restriction - conditional on whether or not they chose false on everything - using && on everything - can't continue without any choice
+  if (!lowercaseOption && !uppercaseOption && !numericOption && !specialCharactersOption) {
+    alert(`Uh, oh, that doesn't seem right! Please start again and make sure to select at least one type of character for your password to be generated.`);
+  };
   //return statement
-  // return passwordOptions = [lowercaseOption, uppercaseOption, numericOption, specialCharactersOption];
   passwordOptions = {
     length: length,
     lowercaseOption: lowercaseOption,
     uppercaseOption: uppercaseOption,
     numericOption: numericOption,
     specialCharactersOption: specialCharactersOption
-  }
-
+  };
   return passwordOptions;
-}
+};
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-  //random picker of at least 1 character from each array
   let randomIndex = Math.floor(Math.random() * arr.length);
   let randomElement = arr[randomIndex];
   return randomElement
-}
+};
 
 // Function to generate password with user input
 function generatePassword() {
@@ -180,43 +152,44 @@ function generatePassword() {
   let possibles = [];
   let finalPassword = [];
 
+  //adding guaranteed characters and possible options in two different arrays based on user options
   if (options.lowercaseOption) {
     possibles = possibles.concat(lowerCasedCharacters);
     guarantee.push(getRandom(lowerCasedCharacters));
     console.log(guarantee)
-  } //repeat for each one
+  };
 
-  if (options.lowercaseOption) {
-    possibles = possibles.concat(lowerCasedCharacters);
-    guarantee.push(getRandom(lowerCasedCharacters));
+  if (options.uppercaseOption) {
+    possibles = possibles.concat(upperCasedCharacters);
+    guarantee.push(getRandom(upperCasedCharacters));
     console.log(guarantee)
-  }
+  };
 
-  if (options.lowercaseOption) {
-    possibles = possibles.concat(lowerCasedCharacters);
-    guarantee.push(getRandom(lowerCasedCharacters));
+  if (options.numericOption) {
+    possibles = possibles.concat(numericCharacters);
+    guarantee.push(getRandom(numericCharacters));
     console.log(guarantee)
-  }
+  };
 
-  if (options.lowercaseOption) {
-    possibles = possibles.concat(lowerCasedCharacters);
-    guarantee.push(getRandom(lowerCasedCharacters));
+  if (options.specialCharactersOption) {
+    possibles = possibles.concat(specialCharacters);
+    guarantee.push(getRandom(specialCharacters));
     console.log(guarantee)
-  }
+  };
 
-
+  //looping through possibles and guarantee arrays to create the final password based on user options
   for (let i = 0; i < options.length; i++) {
     var possible = getRandom(possibles);
     finalPassword.push(possible);
     console.log(possible);
-  }
+  };
 
   for (let i = 0; i < guarantee.length; i++) {
     finalPassword[i] = guarantee[i];
-  }
+  };
 
   return finalPassword.join(''); // adds up both for loops
-}
+};
 
 
 // Get references to the #generate element
@@ -228,7 +201,7 @@ function writePassword() {
   var passwordText = document.querySelector('#password');
 
   passwordText.value = password;
-}
+};
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
